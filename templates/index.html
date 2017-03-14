@@ -1,0 +1,18 @@
+{% extends "default.html" %}
+
+{% block content %}
+
+{% for post in posts %}
+    <article>
+
+        <h1>{{ post.title }}</h1>
+
+        <p>
+            {{ post.content }}
+        </p>
+
+    </article>
+
+{% endfor %}
+
+{% endblock %}

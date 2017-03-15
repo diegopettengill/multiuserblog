@@ -1,11 +1,17 @@
 import webapp2
-import handlers.app
 from handlers.main import IndexHandler
 from handlers.post import PostHandler
 from handlers.newpost import NewPostHandler
+from handlers.signup import SignUpHandler
+from handlers.login import LoginHandler
 
-app = webapp2.WSGIApplication([
+
+routes = [
     ('/', IndexHandler),
     ('/post/(\d+)', PostHandler),
-    ('/newpost', NewPostHandler)
-], debug=True)
+    ('/newpost', NewPostHandler),
+    ('/signup', SignUpHandler),
+    ('/login', LoginHandler)
+]
+
+app = webapp2.WSGIApplication(routes, debug=True)

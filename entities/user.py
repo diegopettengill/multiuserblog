@@ -12,3 +12,7 @@ class User(db.Model):
     def by_username(cls, username):
         user = User.all().filter('username =', username).get()
         return user
+
+    @classmethod
+    def by_id(cls, uid):
+        return User.get_by_id(uid)

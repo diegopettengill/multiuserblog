@@ -1,41 +1,7 @@
 {% extends "default.html" %}
 
 {% block content %}
-<form method="post">
-
-    {% if error %}
-    <div class="alert alert-danger" role="alert">
-        {{ error }}
-    </div>
-    {% endif %}
-
-    <h1>Sign Up</h1>
-
-    <div class="form-group">
-        <label for="">username</label>
-        <input type="text" class="form-control" name="username" value="{{ username }}" placeholder="Title">
-    </div>
-
-    <div class="form-group">
-        <label for="">password</label>
-        <input type="password" class="form-control" name="password" placeholder="">
-    </div>
-
-    <div class="form-group">
-        <label for="">verify</label>
-        <input type="password" class="form-control" name="password_verify" placeholder="">
-    </div>
-
-    <div class="form-group">
-        <label for="">email</label>
-        <input type="text" class="form-control" name="email" value="{{ email }}" placeholder="email">
-    </div>
-
-    <div class="form-group text-right">
-        <button type="submit" class="btn btn-success">Submit</button>
-    </div>
-
-</form>
+    <h1>Hello! {{ current_user.username }}</h1>
 {% endblock %}
 
 

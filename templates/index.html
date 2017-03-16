@@ -3,16 +3,48 @@
 {% block content %}
 
 {% for post in posts %}
-    <article>
+<article>
 
-        <h1>{{ post.title }}</h1>
+    <div class="container">
 
-        <p>
-            {{ post.content }}
-        </p>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
 
-    </article>
+            <span class="post-date">{{ post.created.strftime("%d. %B %Y")}}</span>
 
+            <h1>{{ post.title }}</h1>
+
+            <p>
+                {{ post.content|truncate(350, True,'...') }}
+            </p>
+
+            <div class="post-author">
+                {{ post.author_id }}
+            </div>
+
+            <div class="post-like pull-left">
+                <i class="fa fa-heart-o" aria-hidden="true"></i> <span>52</span>
+            </div>
+
+            <div class="post-like pull-right">
+                <i class="fa fa-comment-o" aria-hidden="true"></i> <span>1 comments</span>
+            </div>
+
+            <div class="clearfix"></div>
+            {% if current_user %}
+                {% if post.author_id|int == current_user.key().id() %}
+                <div class="post-author-actions">
+                    <a href="">Edit</a>
+                    <a href="">Delete</a>
+                </div>
+                {% endif %}
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</article>
 {% endfor %}
+
 
 {% endblock %}

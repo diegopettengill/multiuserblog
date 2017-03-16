@@ -5,6 +5,8 @@ from entities.user import User
 class Auth:
     """Handles the authentication flow"""
 
+    secret = ""
+
     @staticmethod
     def signup(username, password, password_verify, email):
         """Signs up the user running all the validations"""
@@ -82,3 +84,7 @@ class Auth:
                 return True
             else:
                 return False
+
+    @staticmethod
+    def invalidate_cookie(response):
+        response.headers.add_header("Set-Cookie", "user_id=; Path=/")

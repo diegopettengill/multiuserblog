@@ -16,10 +16,8 @@ class Handler(webapp2.RequestHandler):
             if Auth.check_cookie(request.cookies.get("user_id")):
                 self.current_user = Auth.get_current_user(request.cookies.get("user_id"))
             else:
-                print "INVALID USER"
-
-        # if Auth.check_cookie(request.cookies.get("user_id")):
-        #     self.redirect("/login")
+                Auth.invalidate_cookie(response)
+                self.redirect("/")
 
     def write(self, *a, **kw):
         self.response.out.write(*a, **kw)
@@ -31,3 +29,6 @@ class Handler(webapp2.RequestHandler):
 
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
+
+    def get_config(self):
+        return self.request.config

@@ -11,11 +11,13 @@ class NewPostHandler(Handler):
             self.render("newpost.html")
 
     def post(self):
+
+        current_user_id = str(Auth.get_current_user(self.request.cookies.get("user_id")).key().id())
         title = self.request.get("title")
         text = self.request.get("content")
 
         if title and text:
-            post = Post(title=title, content=text)
+            post = Post(author_id=current_user_id, title=title, content=text)
             post.put()
             self.redirect("/post/" + str(post.key().id()))
         else:

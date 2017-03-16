@@ -13,12 +13,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="/assets/css/app.css">
+
 </head>
 <body>
 
 <header>
     <nav class="navbar navbar-default">
-        <div class="container-fluid">
+        <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -36,11 +38,11 @@
                 <li><a href="/post/new">Submit a post!</a></li>
 
                 {% if current_user %}
-                    <li><a href="/logout">Logout</a></li>
+                <li><a href="/logout">Logout</a></li>
                 {% endif %}
                 {% if not current_user %}
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/signup">Sign Up</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/signup">Sign Up</a></li>
                 {% endif %}
 
             </ul>
@@ -51,15 +53,10 @@
 </header>
 
 <section>
-    <div class="container">
 
-        <div class="col-xs-8 col-xs-offset-2">
+    {% block content %}
+    {% endblock %}
 
-            {% block content %}
-            {% endblock %}
-
-        </div>
-    </div>
 </section>
 
 <!-- Latest compiled and minified JavaScript -->
@@ -68,5 +65,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/d2ae733aa4.js"></script>
 </body>
 </html>

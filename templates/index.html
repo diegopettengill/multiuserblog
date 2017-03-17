@@ -18,7 +18,7 @@
             </p>
 
             <div class="post-author">
-                {{ post.author_id }}
+                {{ post.author.username }}
             </div>
 
             <div class="post-like pull-left">
@@ -26,17 +26,23 @@
             </div>
 
             <div class="post-like pull-right">
-                <i class="fa fa-comment-o" aria-hidden="true"></i> <span>1 comments</span>
+                <a href="post/{{post.key().id()}}#comments">
+                    <i class="fa fa-comment-o" aria-hidden="true"></i> <span>1 comments</span>
+                </a>
             </div>
 
             <div class="clearfix"></div>
             {% if current_user %}
-                {% if post.author_id|int == current_user.key().id() %}
-                <div class="post-author-actions">
-                    <a href="">Edit</a>
-                    <a href="">Delete</a>
-                </div>
-                {% endif %}
+            {% if post.author.key().id()|int == current_user.key().id() %}
+            <div class="post-author-actions">
+                <a href="/post/{{post.key().id()}}/edit" class="action-edit">
+                    <i class="fa fa-pencil-square-o"></i> Edit
+                </a>
+                <a href="post/{{post.key().id()}}/delete" class="action-delete">
+                    <i class="fa fa-trash-o"></i> Delete
+                </a>
+            </div>
+            {% endif %}
             {% endif %}
 
         </div>

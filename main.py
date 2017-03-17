@@ -3,9 +3,12 @@ from handlers.main import IndexHandler
 from handlers.welcome import WelcomeHandler
 from handlers.post import PostHandler
 from handlers.newpost import NewPostHandler
+from handlers.editpost import EditPostHandler
+from handlers.deletepost import DeletePostHandler
 from handlers.signup import SignUpHandler
 from handlers.login import LoginHandler
 from handlers.logout import LogoutHandler
+from handlers.comment import CommentHandler
 
 config = {
     'blog_config': {
@@ -18,6 +21,9 @@ routes = [
     ('/welcome', WelcomeHandler),
     ('/post/(\d+)', PostHandler),
     ('/post/new', NewPostHandler),
+    ('/post/(\d+)/edit', EditPostHandler),
+    ('/post/(\d+)/delete', DeletePostHandler),
+    ('/comments', CommentHandler),
     ('/signup', SignUpHandler),
     ('/login', LoginHandler),
     ('/logout', LogoutHandler)

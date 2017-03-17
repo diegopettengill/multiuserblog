@@ -1,15 +1,71 @@
 {% extends "default.html" %}
 
 {% block content %}
-<article>
+<div class="container">
 
-    <h1>{{ post.title }}</h1>
+    <article class="post-view">
 
-    <p>
-        {{ post.content }}
-    </p>
+        <h1>{{ post.title }}</h1>
 
-</article>
+        <p>
+            {{ post.content }}
+        </p>
+
+
+        <div id="comments" class="comments-wrapper">
+
+            <h2>COMMENTS</h2>
+
+            <div class="comments-form">
+
+                <form action="/comments" id="comment-form" method="post">
+
+                    <div class="row">
+
+                        <input type="hidden" name="pid" value="{{ post.key().id() }}">
+
+                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                            <textarea name="text" id="" cols="30" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="col-xs-123 col-sm-12 col-md-3 col-lg-3">
+                            <button class="btn btn-success">SUBMIT</button>
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="comments-list">
+
+                {% for comment in comments %}
+                <div class="comment-item">
+
+                    <div class="comment-author">
+                        {{ comment.author.username }}
+                    </div>
+
+                    <div class="comment-datetime">
+                        6 minutes ago
+                    </div>
+
+                    <p>
+                        {{ comment.text }}
+                    </p>
+
+                </div>
+                {% endfor %}
+
+
+            </div>
+
+        </div>
+
+    </article>
+
+</div>
 {% endblock %}
 
 

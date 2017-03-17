@@ -52,6 +52,23 @@ article p {
     color: #b5b5b5;
 }
 
+.post-author-actions {
+    margin-top: 15px;
+}
+
+.post-author-actions a{
+    text-decoration: none;
+}
+
+.action-edit {
+    color:#007AB8;
+    margin-right: 20px;
+}
+
+.action-delete {
+    color:#eb4d5c;
+}
+
 /* BOOTSTRAP OVERRIDE */
 .container {
     width: 1000px;

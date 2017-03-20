@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BLOG</title>
+    <title>.expression - A multi author blog - Udacity Full Stack Web Developer Project</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -12,14 +12,14 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/app.css">
 
 </head>
 <body>
 
 <header>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -30,19 +30,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Blog</a>
+                <a class="navbar-brand logo" href="/">
+                    <img src="/assets/img/logo.png" alt=".expression - Spread you ideas to the world">
+                </a>
             </div>
 
             <ul class="nav navbar-nav navbar-right">
 
-                <li><a href="/post/new">Submit a post!</a></li>
+                <li><a href="/post/new" title="Submit a post!" class="btn-submit btn-header">Submit a post!</a></li>
 
                 {% if current_user %}
-                <li><a href="/logout">Logout</a></li>
+                    <li>
+                        <a href="/logout">
+                            <i class="fa fa-sign-out"></i> Logout
+                        </a>
+                    </li>
                 {% endif %}
                 {% if not current_user %}
-                <li><a href="/login">Login</a></li>
-                <li><a href="/signup">Sign Up</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/signup">Sign Up</a></li>
                 {% endif %}
 
             </ul>
@@ -59,6 +65,30 @@
 
 </section>
 
+<footer>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <ul>
+                    <li>
+                        <a href="/signup">
+                            Sign Up
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="clearfix"></div>
+
+        </div>
+
+    </div>
+
+</footer>
+
 <!-- Latest compiled and minified JavaScript -->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -69,6 +99,7 @@
         integrity="sha384-pg7GKHZrgICSnX14mRuztzbN1Bm75xUKyCyzDCUbkOp0nHzgGYqiLsc6XpflqxAc"
         crossorigin="anonymous"></script>
 <script src="https://use.fontawesome.com/d2ae733aa4.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
 <script src="/assets/js/scripts.js"></script>
 </body>
 </html>

@@ -1,34 +1,37 @@
 {% extends "default.html" %}
 
 {% block content %}
-<form method="post">
+    <div class="container">
 
-    {% if error %}
-    <div class="alert alert-danger" role="alert">
-        {{ error }}
+        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+
+            <form method="post">
+
+                {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+
+                    <label for="">Title</label>
+                    <input type="text" class="form-control" name="title" placeholder="Title">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="">Text</label>
+                    <textarea class="form-control summernote" rows="10" name="content" placeholder="Title"></textarea>
+
+                </div>
+
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-outline">Submit</button>
+                </div>
+
+            </form>
+        </div>
     </div>
-    {% endif %}
-
-    <div class="form-group">
-
-        <label for="">Title</label>
-        <input type="text" class="form-control" name="title" placeholder="Title">
-
-    </div>
-
-    <div class="form-group">
-
-        <label for="">Text</label>
-        <textarea class="form-control" rows="10" name="content" placeholder="Title"></textarea>
-
-    </div>
-
-    <div class="form-group text-right">
-        <button type="submit" class="btn btn-success">Submit</button>
-    </div>
-
-</form>
 {% endblock %}
-
-
-

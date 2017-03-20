@@ -9,6 +9,9 @@ handlers:
 - url: /assets/js.*
   static_dir: assets/js
 
+- url: /assets/img.*
+  static_dir: assets/img
+
 - url: /.*
   script: main.app
 

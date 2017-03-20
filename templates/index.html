@@ -2,55 +2,63 @@
 
 {% block content %}
 
-{% for post in posts %}
-<article>
+    {% for post in posts %}
+        <article>
 
-    <div class="container">
+            <div class="container">
 
-        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
 
-            <span class="post-date">{{ post.created.strftime("%d. %B %Y")}}</span>
+                    <span class="post-date">{{ post.created.strftime("%d. %B %Y") }}</span>
 
-            <h1>{{ post.title }}</h1>
+                    <h1>
+                        <a href="/post/{{ post.key().id() }}" title="{{ post.title }}">
+                            {{ post.title }}
+                        </a>
+                    </h1>
 
-            <p>
-                {{ post.content|truncate(350, True,'...') }}
-            </p>
+                    <p>
+                        {{ post.content|truncate(350, True,'...')|safe }}
+                    </p>
 
-            <div class="post-author">
-                {{ post.author.username }}
+                    <div class="post-author">
+                        submited by: <strong>{{ post.author.username }}</strong>
+                    </div>
+
+                    <div class="post-like pull-left">
+
+                        <a href="javascript:void(0);" data-post-id="{{ post.key().id() }}"
+                           class="like-post {{ "post-liked" if post.liked else "" }}">
+                            <i class="fa fa-heart-o" aria-hidden="true"></i> <span>{{ post.post_like.count() }}</span>
+                        </a>
+                    </div>
+
+                    <div class="post-like pull-right">
+                        <a href="post/{{ post.key().id() }}#comments">
+                            <i class="fa fa-comment-o" aria-hidden="true"></i> <span>{{ post.post_comment.count() }} comments</span>
+                        </a>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    {% if current_user %}
+                        {% if post.author.key().id()|int == current_user.key().id() %}
+                            <div class="post-author-actions">
+                                <a href="/post/{{ post.key().id() }}/edit" class="action-edit btn btn-outline">
+                                    <i class="fa fa-pencil-square-o"></i> Edit
+                                </a>
+                                <a href="post/{{ post.key().id() }}/delete" class="action-delete btn btn-outline">
+                                    <i class="fa fa-trash-o"></i> Delete
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+
             </div>
 
-            <div class="post-like pull-left">
-                <i class="fa fa-heart-o" aria-hidden="true"></i> <span>52</span>
-            </div>
-
-            <div class="post-like pull-right">
-                <a href="post/{{post.key().id()}}#comments">
-                    <i class="fa fa-comment-o" aria-hidden="true"></i> <span>1 comments</span>
-                </a>
-            </div>
-
-            <div class="clearfix"></div>
-            {% if current_user %}
-            {% if post.author.key().id()|int == current_user.key().id() %}
-            <div class="post-author-actions">
-                <a href="/post/{{post.key().id()}}/edit" class="action-edit">
-                    <i class="fa fa-pencil-square-o"></i> Edit
-                </a>
-                <a href="post/{{post.key().id()}}/delete" class="action-delete">
-                    <i class="fa fa-trash-o"></i> Delete
-                </a>
-            </div>
-            {% endif %}
-            {% endif %}
-
-        </div>
-
-    </div>
-
-</article>
-{% endfor %}
+        </article>
+    {% endfor %}
 
 
 {% endblock %}

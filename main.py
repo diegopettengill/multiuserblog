@@ -9,6 +9,7 @@ from handlers.signup import SignUpHandler
 from handlers.login import LoginHandler
 from handlers.logout import LogoutHandler
 from handlers.comment import CommentHandler
+from handlers.like import LikeHandler
 
 config = {
     'blog_config': {
@@ -23,6 +24,7 @@ routes = [
     ('/post/new', NewPostHandler),
     ('/post/(\d+)/edit', EditPostHandler),
     ('/post/(\d+)/delete', DeletePostHandler),
+    ('/post/like', LikeHandler),
     ('/comments', CommentHandler),
     ('/signup', SignUpHandler),
     ('/login', LoginHandler),

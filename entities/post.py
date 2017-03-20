@@ -10,5 +10,12 @@ class Post(db.Model):
     modified = db.DateTimeProperty(auto_now_add=True)
 
     @classmethod
+    def list(cls, offset=None):
+        return Post.gql("")
+
+    @classmethod
     def by_id(cls, post_id):
         return Post.get_by_id(post_id)
+
+    def _pre_get_hook(cls, key):
+        print key().id()

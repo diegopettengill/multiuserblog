@@ -1,71 +1,98 @@
 {% extends "default.html" %}
 
 {% block content %}
-<div class="container">
+    <div class="container">
 
-    <article class="post-view">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
 
-        <h1>{{ post.title }}</h1>
+            <article class="post-view">
 
-        <p>
-            {{ post.content }}
-        </p>
+                <h1>{{ post.title }}</h1>
 
+                <p>
+                    {{ post.content|safe }}
+                </p>
 
-        <div id="comments" class="comments-wrapper">
+            </article>
 
-            <h2>COMMENTS</h2>
+        </div>
 
-            <div class="comments-form">
+    </div>
 
-                <form action="/comments" id="comment-form" method="post">
+    <article class="author-wrapper">
 
-                    <div class="row">
+        <div class="container text-center">
 
-                        <input type="hidden" name="pid" value="{{ post.key().id() }}">
+            <h4>Author</h4>
 
-                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                            <textarea name="text" id="" cols="30" class="form-control" rows="3"></textarea>
-                        </div>
+            <h2>{{ post.author.name }}</h2>
 
-                        <div class="col-xs-123 col-sm-12 col-md-3 col-lg-3">
-                            <button class="btn btn-success">SUBMIT</button>
-                        </div>
-
-                    </div>
-
-                </form>
-
-            </div>
-
-            <div class="comments-list">
-
-                {% for comment in comments %}
-                <div class="comment-item">
-
-                    <div class="comment-author">
-                        {{ comment.author.username }}
-                    </div>
-
-                    <div class="comment-datetime">
-                        6 minutes ago
-                    </div>
-
-                    <p>
-                        {{ comment.text }}
-                    </p>
-
-                </div>
-                {% endfor %}
-
-
-            </div>
+            <p>
+                {{ post.author.bio }}
+            </p>
 
         </div>
 
     </article>
 
-</div>
+    <div class="container">
+
+        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+
+            <div id="comments" class="comments-wrapper">
+
+                <h4>Responses</h4>
+
+                <div class="comments-form">
+
+                    <form action="/comments" id="comment-form" method="post">
+
+                        <div class="row">
+
+                            <input type="hidden" name="pid" value="{{ post.key().id() }}">
+
+                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                <textarea name="text" id="" cols="30" class="form-control" rows="3"></textarea>
+                            </div>
+
+                            <div class="col-xs-123 col-sm-12 col-md-3 col-lg-3">
+                                <button class="btn btn-outline">SUBMIT</button>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="comments-list">
+
+                    {% for comment in comments %}
+                        <div class="comment-item">
+
+                            <div class="comment-author">
+                                {{ comment.author.username }}
+                            </div>
+
+                            <div class="comment-datetime">
+                                {{ comment.created.strftime("%d. %B %Y") }}
+                            </div>
+
+                            <p>
+                                {{ comment.text }}
+                            </p>
+
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
 {% endblock %}
 
 

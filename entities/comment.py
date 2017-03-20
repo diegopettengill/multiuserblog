@@ -13,5 +13,20 @@ class Comment(db.Model):
 
     @classmethod
     def by_post(cls, post):
+        """
+        Retrieves a comment by a post key
+        :param post:
+        :return: Comment object
+        """
         comments = Comment.gql("WHERE post = :1 ORDER BY created DESC", post.key())
         return comments
+
+    @classmethod
+    def by_id(cls, id):
+        """
+        Retrieves a comment by its ID
+        :param id:
+        :return: Comment object
+        """
+        comment = Comment.get_by_id(id)
+        return comment

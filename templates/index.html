@@ -2,63 +2,107 @@
 
 {% block content %}
 
-    {% for post in posts %}
-        <article>
+{% if posts %}
 
-            <div class="container">
+{% for post in posts %}
+<article>
 
-                <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+    <div class="container">
 
-                    <span class="post-date">{{ post.created.strftime("%d. %B %Y") }}</span>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
 
-                    <h1>
-                        <a href="/post/{{ post.key().id() }}" title="{{ post.title }}">
-                            {{ post.title }}
-                        </a>
-                    </h1>
+            <span class="post-date">{{ post.created.strftime("%d. %B %Y") }}</span>
 
-                    <p>
-                        {{ post.content|truncate(350, True,'...')|safe }}
-                    </p>
+            <h1>
+                <a href="/post/{{ post.key().id() }}" title="{{ post.title }}">
+                    {{ post.title }}
+                </a>
+            </h1>
 
-                    <div class="post-author">
-                        submited by: <strong>{{ post.author.username }}</strong>
-                    </div>
+            <p>
+                {{ post.content|truncate(350, True,'...')|safe }}
+            </p>
 
-                    <div class="post-like pull-left">
-
-                        <a href="javascript:void(0);" data-post-id="{{ post.key().id() }}"
-                           class="like-post {{ "post-liked" if post.liked else "" }}">
-                            <i class="fa fa-heart-o" aria-hidden="true"></i> <span>{{ post.post_like.count() }}</span>
-                        </a>
-                    </div>
-
-                    <div class="post-like pull-right">
-                        <a href="post/{{ post.key().id() }}#comments">
-                            <i class="fa fa-comment-o" aria-hidden="true"></i> <span>{{ post.post_comment.count() }} comments</span>
-                        </a>
-                    </div>
-
-                    <div class="clearfix"></div>
-                    {% if current_user %}
-                        {% if post.author.key().id()|int == current_user.key().id() %}
-                            <div class="post-author-actions">
-                                <a href="/post/{{ post.key().id() }}/edit" class="action-edit btn btn-outline">
-                                    <i class="fa fa-pencil-square-o"></i> Edit
-                                </a>
-                                <a href="post/{{ post.key().id() }}/delete" class="action-delete btn btn-outline">
-                                    <i class="fa fa-trash-o"></i> Delete
-                                </a>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-
-                </div>
-
+            <div class="post-author">
+                <strong>{{ post.author.name if post.author.name else post.author.username }}</strong>
             </div>
 
-        </article>
-    {% endfor %}
+            <div class="post-like pull-left">
+
+                <a href="javascript:void(0);" data-post-id="{{ post.key().id() }}"
+                   class="like-post {{ " post-liked" if post.liked else "" }}">
+                <i class="fa fa-heart-o" aria-hidden="true"></i> <span>{{ post.post_like.count() }}</span>
+                </a>
+            </div>
+
+            <div class="post-like pull-right">
+                <a href="post/{{ post.key().id() }}#comments">
+                    <i class="fa fa-comment-o" aria-hidden="true"></i>
+                    <span>{{ post.post_comment.count() }} comments</span>
+                </a>
+            </div>
+
+            <div class="clearfix"></div>
+            {% if current_user %}
+            {% if post.author.key().id()|int == current_user.key().id() %}
+            <div class="post-author-actions">
+                <a href="/post/{{ post.key().id() }}/edit" class="action-edit btn btn-outline">
+                    <i class="fa fa-pencil-square-o"></i> Edit
+                </a>
+                <a href="post/{{ post.key().id() }}/delete" class="action-delete btn btn-outline">
+                    <i class="fa fa-trash-o"></i> Delete
+                </a>
+            </div>
+            {% endif %}
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</article>
+{% endfor %}
+
+{% endif %}
+
+{% if not posts %}
+
+    <div class="container text-center">
+
+        <div class="no-posts-icon">
+            <i class="fa fa-frown-o"></i>
+        </div>
+
+        <h3 >No posts to show :(</h3>
+
+        <a href="/" class="primary-color">Go to main page</a>
+    </div>
+
+{% endif %}
+
+<div class="container">
+
+    <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+
+        <nav aria-label="...">
+            <ul class="pager">
+
+                {% if posts %}
+                <li class="previous"><a href="/?page={{ next_page }}"><span aria-hidden="true">&larr;</span> Older</a>
+                </li>
+
+                {% if page > 1 %}
+                <li class="next"><a href="/?page={{ previous_page }}">Newer <span aria-hidden="true">&rarr;</span></a>
+                </li>
+                {% endif %}
+
+                {% endif %}
+            </ul>
+        </nav>
+
+    </div>
+
+</div>
 
 
 {% endblock %}

@@ -23,23 +23,32 @@ class LikeHandler(Handler):
             # checks if user already liked this post, if returns > 0
             user_liked = Like.check_user_liked(current_user, post)
 
-            if user_liked > 0:
-                Like.unlike(current_user, post)
+            # checks if this post belongs to the current_user
+            if post.author.key().id == current_user.key().id:
                 self.response.content_type = 'application/json'
                 response_obj = {
-                    'type': 'success',
-                    'message': 'Post unliked!',
-                    'action': 'unlike'
+                    'type': 'error',
+                    'message': 'You can`t like you own posts :('
                 }
                 self.response.write(json.encode(response_obj))
             else:
-                like = Like(author=current_user, post=post)
-                like.put()
+                if user_liked > 0:
+                    Like.unlike(current_user, post)
+                    self.response.content_type = 'application/json'
+                    response_obj = {
+                        'type': 'success',
+                        'message': 'Post unliked!',
+                        'action': 'unlike'
+                    }
+                    self.response.write(json.encode(response_obj))
+                else:
+                    like = Like(author=current_user, post=post)
+                    like.put()
 
-                self.response.content_type = 'application/json'
-                response_obj = {
-                    'type': 'success',
-                    'message': 'Post liked!',
-                    'action': 'like'
-                }
-                self.response.write(json.encode(response_obj))
+                    self.response.content_type = 'application/json'
+                    response_obj = {
+                        'type': 'success',
+                        'message': 'Post liked!',
+                        'action': 'like'
+                    }
+                    self.response.write(json.encode(response_obj))

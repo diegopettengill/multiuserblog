@@ -6,9 +6,17 @@ from handlers.auth import Auth
 class IndexHandler(Handler):
     def get(self):
 
+        offset = 0
+
+        if self.request.get("page"):
+            offset = int(self.request.get("page")) - 1
+
+        current_page = offset + 1
+        next_page = current_page + 1
+        previous_page = current_page - 1
+
         current_user = Auth.get_current_user(self.request.cookies.get("user_id"))
-        # posts = db.GqlQuery("SELECT * from Post order by created desc limit 10")
-        posts_query = Post.list()
+        posts_query = Post.list(10, str(offset*10))
 
         # iterates over posts
         posts = []
@@ -22,4 +30,4 @@ class IndexHandler(Handler):
                         post.liked = False
             posts.append(post)
 
-        self.render("index.html", posts=posts)
+        self.render("index.html", posts=posts, page=current_page, next_page=next_page, previous_page=previous_page)

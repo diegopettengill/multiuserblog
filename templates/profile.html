@@ -1,0 +1,66 @@
+{% extends "default.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="page-header">
+        <h1>Hello!
+            <small>{{ current_user.username }}</small>
+        </h1>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+
+            {% include "elements/sidebar.html" %}
+
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+
+            <h2>Your profile</h2>
+
+
+            {% if success: %}
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Success!</strong> {{ success }}
+            </div>
+            {% endif %}
+
+
+            <form method="post">
+
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="">name</label>
+                    <input type="text" class="form-control" name="name" value="{{ current_user.name if current_user.name else '' }}" placeholder="Title">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="">bio</label>
+                    <textarea name="bio" id="" cols="30" rows="3" class="form-control">{{ current_user.bio if current_user.bio else '' }}</textarea>
+                </div>
+
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-outline">Submit</button>
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

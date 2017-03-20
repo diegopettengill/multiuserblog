@@ -6,7 +6,7 @@ from handlers.auth import Auth
 class EditPostHandler(Handler):
     def get(self, post_id):
         if not Auth.is_logged_in(self.request):
-            self.redirect("/signup")
+            self.redirect("/login")
         else:
             current_user = Auth.get_current_user(self.request.cookies.get("user_id"))
             if post_id:

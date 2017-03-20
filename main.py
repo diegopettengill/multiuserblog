@@ -1,6 +1,7 @@
 import webapp2
 from handlers.main import IndexHandler
 from handlers.welcome import WelcomeHandler
+from handlers.profile import ProfileHandler
 from handlers.post import PostHandler
 from handlers.newpost import NewPostHandler
 from handlers.editpost import EditPostHandler
@@ -9,6 +10,7 @@ from handlers.signup import SignUpHandler
 from handlers.login import LoginHandler
 from handlers.logout import LogoutHandler
 from handlers.comment import CommentHandler
+from handlers.deletecomment import DeleteCommentHandler
 from handlers.like import LikeHandler
 
 config = {
@@ -17,15 +19,19 @@ config = {
     }
 }
 
+# defining the routes
 routes = [
     ('/', IndexHandler),
     ('/welcome', WelcomeHandler),
-    ('/post/(\d+)', PostHandler),
+    ('/account/profile', ProfileHandler),
+    ('/post/([0-9]+)', PostHandler),
     ('/post/new', NewPostHandler),
-    ('/post/(\d+)/edit', EditPostHandler),
-    ('/post/(\d+)/delete', DeletePostHandler),
+    ('/post/([0-9]+)/edit', EditPostHandler),
+    ('/post/([0-9]+)/delete', DeletePostHandler),
     ('/post/like', LikeHandler),
     ('/comments', CommentHandler),
+    ('/comments/([0-9]+)', CommentHandler),
+    ('/comments/([0-9]+)/delete', DeleteCommentHandler),
     ('/signup', SignUpHandler),
     ('/login', LoginHandler),
     ('/logout', LogoutHandler)

@@ -6,7 +6,7 @@ from handlers.auth import Auth
 class NewPostHandler(Handler):
     def get(self):
         if not Auth.is_logged_in(self.request):
-            self.redirect("/signup")
+            self.redirect("/login")
         else:
             self.render("newpost.html")
 

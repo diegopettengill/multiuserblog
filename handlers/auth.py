@@ -29,11 +29,10 @@ class Auth:
                 # username exists
                 if User.by_username(username):
                     raise Exception(
-                        "This username already exists, please try"
-                        " a diferent one")
+                        "This username already exists,"
+                        " please try a diferent one")
                 else:
-                    salt = bcrypt.gensalt()
-                    hashed_password = bcrypt.hashpw(password, salt)
+                    hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
                     user = User(username=username, password=hashed_password,
                                 email=email)
                     user.put()
@@ -132,3 +131,18 @@ class Auth:
         :return: None
         """
         response.headers.add_header("Set-Cookie", "user_id=; Path=/")
+
+    def restricted(func):
+        """
+            A decorator to confirm a user is logged in or redirect as needed.
+            """
+
+        def login(self, *args, **kwargs):
+            print "EITA PORRA ESSA CARAIA FUNCIONADA"
+            # Redirect to login if user not logged in, else execute func.
+            if not self.current_user:
+                self.redirect("/login")
+            else:
+                func(self, *args, **kwargs)
+
+        return login

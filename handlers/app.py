@@ -15,8 +15,9 @@ class Handler(webapp2.RequestHandler):
         self.initialize(request, response)
         if Auth.is_logged_in(request):
             if Auth.check_cookie(request.cookies.get("user_id")):
-                cookie = request.cookies.get("user_id")
-                self.current_user = Auth.get_current_user(cookie)
+                self.current_user = Auth.get_current_user(
+                    request.cookies.get("user_id")
+                )
             else:
                 Auth.invalidate_cookie(response)
                 self.redirect("/")

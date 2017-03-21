@@ -17,7 +17,7 @@ class LikeHandler(Handler):
             self.response.write(json.encode(response_obj))
         else:
 
-            current_user = Auth.get_current_user(self.request.cookies.get("user_id"))
+            current_user = self.current_user
             post = Post.by_id(int(self.request.get("pid")))
 
             # checks if user already liked this post, if returns > 0

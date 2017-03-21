@@ -15,7 +15,7 @@ class IndexHandler(Handler):
         next_page = current_page + 1
         previous_page = current_page - 1
 
-        current_user = Auth.get_current_user(self.request.cookies.get("user_id"))
+        current_user = self.current_user
         posts_query = Post.list(10, str(offset*10))
 
         # iterates over posts
@@ -30,4 +30,8 @@ class IndexHandler(Handler):
                         post.liked = False
             posts.append(post)
 
-        self.render("index.html", posts=posts, page=current_page, next_page=next_page, previous_page=previous_page)
+        self.render("index.html",
+                    posts=posts,
+                    page=current_page,
+                    next_page=next_page,
+                    previous_page=previous_page)

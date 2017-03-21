@@ -18,7 +18,8 @@ class Comment(db.Model):
         :param post:
         :return: Comment object
         """
-        comments = Comment.gql("WHERE post = :1 ORDER BY created DESC", post.key())
+        comments = Comment.gql("WHERE post = :1 ORDER BY created DESC",
+                               post.key())
         return comments
 
     @classmethod

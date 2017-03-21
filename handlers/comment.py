@@ -49,8 +49,7 @@ class CommentHandler(Handler):
             }
             self.response.write(json.encode(response_obj))
         else:
-
-            current_user = Auth.get_current_user(self.request.cookies.get("user_id"))
+            current_user = self.current_user
             post = Post.by_id(int(self.request.get("pid")))
             text = self.request.get("text")
             comment_id = self.request.get("comment_id")

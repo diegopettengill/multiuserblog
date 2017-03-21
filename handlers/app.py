@@ -4,7 +4,8 @@ import jinja2
 from handlers.auth import Auth
 
 template_dir = os.path.join(os.path.dirname(__file__), '../templates')
-jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=True)
+jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
+                               autoescape=True)
 
 
 class Handler(webapp2.RequestHandler):
@@ -14,7 +15,8 @@ class Handler(webapp2.RequestHandler):
         self.initialize(request, response)
         if Auth.is_logged_in(request):
             if Auth.check_cookie(request.cookies.get("user_id")):
-                self.current_user = Auth.get_current_user(request.cookies.get("user_id"))
+                cookie = request.cookies.get("user_id")
+                self.current_user = Auth.get_current_user(cookie)
             else:
                 Auth.invalidate_cookie(response)
                 self.redirect("/")

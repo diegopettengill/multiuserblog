@@ -28,7 +28,8 @@ class Like(db.Model):
         :param post:
         :return: Number of likes to that post and user
         """
-        likes = Like.gql("WHERE author = :1 AND post = :2", user.key(), post.key())
+        likes = Like.gql("WHERE author = :1 AND post = :2", user.key(),
+                         post.key())
         return likes.count()
 
     @classmethod
@@ -39,5 +40,6 @@ class Like(db.Model):
         :param post:
         :return: None
         """
-        like = Like.gql("WHERE author = :1 AND post = :2", user.key(), post.key()).get()
+        like = Like.gql("WHERE author = :1 AND post = :2", user.key(),
+                        post.key()).get()
         like.delete()

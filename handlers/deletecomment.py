@@ -15,9 +15,10 @@ class DeleteCommentHandler(Handler):
             self.response.write(json.encode(response_obj))
         else:
             current_user = self.current_user
-            if comment_id:
 
-                comment = Comment.by_id(int(comment_id))
+            comment = Comment.by_id(int(comment_id))
+
+            if comment is not None:
 
                 # verify if this post matches user logged in
                 if comment.author.key().id() == current_user.key().id():

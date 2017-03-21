@@ -28,10 +28,14 @@ class Auth:
 
                 # username exists
                 if User.by_username(username):
-                    raise Exception("This username already exists, please try a diferent one")
+                    raise Exception(
+                        "This username already exists, please try"
+                        " a diferent one")
                 else:
-                    hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
-                    user = User(username=username, password=hashed_password, email=email)
+                    salt = bcrypt.gensalt()
+                    hashed_password = bcrypt.hashpw(password, salt)
+                    user = User(username=username, password=hashed_password,
+                                email=email)
                     user.put()
                     return str(user.key().id())
             else:

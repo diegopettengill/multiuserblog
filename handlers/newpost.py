@@ -1,18 +1,17 @@
 from app import Handler
 from entities.post import Post
-from handlers.auth import Auth
+from handlers.decorators import restricted
 
 
 class NewPostHandler(Handler):
+    @restricted
     def get(self):
-        if not Auth.is_logged_in(self.request):
-            self.redirect("/login")
-        else:
-            self.render("newpost.html")
+        self.render("newpost.html")
 
+    @restricted
     def post(self):
 
-        current_user = Auth.get_current_user(self.request.cookies.get("user_id"))
+        current_user = self.current_user
         title = self.request.get("title")
         text = self.request.get("content")
 

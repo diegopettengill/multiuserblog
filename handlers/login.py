@@ -14,7 +14,9 @@ class LoginHandler(Handler):
         try:
             user = Auth.login(username, password)
             # sets the auth cookie
-            self.response.headers.add_header('Set-Cookie', 'user_id=' + Auth.make_secure_cookie(user))
+            self.response.headers.add_header('Set-Cookie',
+                                             'user_id=' +
+                                             Auth.make_secure_cookie(user))
             self.redirect("/welcome")
         except Exception as e:
             self.render("login.html", error=e)

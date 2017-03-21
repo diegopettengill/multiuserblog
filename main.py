@@ -1,21 +1,24 @@
 import webapp2
-from handlers.main import IndexHandler
-from handlers.welcome import WelcomeHandler
-from handlers.profile import ProfileHandler
-from handlers.post import PostHandler
-from handlers.newpost import NewPostHandler
-from handlers.editpost import EditPostHandler
-from handlers.deletepost import DeletePostHandler
-from handlers.signup import SignUpHandler
-from handlers.login import LoginHandler
-from handlers.logout import LogoutHandler
+
 from handlers.comment import CommentHandler
 from handlers.deletecomment import DeleteCommentHandler
+from handlers.deletepost import DeletePostHandler
+from handlers.editpost import EditPostHandler
 from handlers.like import LikeHandler
+from handlers.login import LoginHandler
+from handlers.logout import LogoutHandler
+from handlers.main import IndexHandler
+from handlers.newpost import NewPostHandler
+from handlers.notfound import NotFoundHandler
+from handlers.post import PostHandler
+from handlers.profile import ProfileHandler
+from handlers.signup import SignUpHandler
+from handlers.welcome import WelcomeHandler
 
 config = {
     'blog_config': {
-        'secret_key': '^.:,+zXsE.7=:<&|f8D&IouU{sP<JiejlU*O?K%8OxgJOV*m=<eb^l/JXY}BZuPM',
+        'secret_key': '^.:,+zXsE.7=:<&|f8D&IouU{sP<JiejlU*O?K%8Ox'
+                      'gJOV*m=<eb^l/JXY}BZuPM',
     }
 }
 
@@ -34,7 +37,8 @@ routes = [
     ('/comments/([0-9]+)/delete', DeleteCommentHandler),
     ('/signup', SignUpHandler),
     ('/login', LoginHandler),
-    ('/logout', LogoutHandler)
+    ('/logout', LogoutHandler),
+    ('/not-found', NotFoundHandler)
 ]
 
 app = webapp2.WSGIApplication(routes, debug=True, config=config)

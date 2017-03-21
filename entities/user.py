@@ -4,6 +4,7 @@ from google.appengine.ext import db
 class User(db.Model):
     username = db.StringProperty(required=True)
     password = db.StringProperty(required=True)
+    salt = db.StringProperty(required=False)
     email = db.StringProperty(required=False)
     avatar = db.BlobProperty()
     created = db.DateTimeProperty(auto_now_add=True)

@@ -10,5 +10,8 @@ Project to Udacity Full Stack Web Developer Nanodegree
 3. Run `dev_appserver.py .`
 4. App will start run on configured port
 
+### External libs
+This project uses [https://github.com/erlichmen/py-bcrypt] Py-Bcrypt
+
 ## License
 MIT
